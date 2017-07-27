@@ -29,7 +29,7 @@ angular.module('cwill747.phonenumber', [])
     function applyPhoneMask(value, region) {
       var phoneMask = value;
       try {
-        //phoneMask = $window.phoneUtils.formatAsTyped(value, region);
+        phoneMask = $window.phoneUtils.formatAsTyped(value, region);
       }
       catch (err) {
         $log.debug(err);
