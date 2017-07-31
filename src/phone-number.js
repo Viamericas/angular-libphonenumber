@@ -97,6 +97,8 @@ angular.module('cwill747.phonenumber', [])
 
         function validator(value) {
           var isValidForRegion = false;
+          var isMobilePhone = false;
+          var getNumberType = "";
           try {
               isValidForRegion = $window.phoneUtils.isValidNumberForRegion(value, scope.countryCode);
               getNumberType = $window.phoneUtils.getNumberType(value, scope.countryCode);

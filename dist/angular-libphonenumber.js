@@ -1,7 +1,7 @@
 /**
  * angular-libphonenumber
  * Paz Muñoz libphonenumber validate mobile phone number
- * @version v1.1.2
+ * @version v1.1.3
  * @link https://github.com/mariapazz/angular-libphonenumber
  * @license Apache-2.0
  */
