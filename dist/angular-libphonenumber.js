@@ -1,8 +1,8 @@
 /**
  * angular-libphonenumber
- * Nathan Hammond's libphonenumber ported to an angular filter
- * @version v1.1.0
- * @link https://github.com/cwill747/angular-libphonenumber
+ * Paz Muñoz libphonenumber validate mobile phone number
+ * @version v1.1.2
+ * @link https://github.com/mariapazz/angular-libphonenumber
  * @license Apache-2.0
  */
 (function (angular) {
@@ -108,11 +108,16 @@ angular.module('cwill747.phonenumber', [])
           var isValidForRegion = false;
           try {
             isValidForRegion = $window.phoneUtils.isValidNumberForRegion(value, scope.countryCode);
+            getNumberType = $window.phoneUtils.getNumberType(value, scope.countryCode);
+
+            if (getNumberType === "MOBILE" || getNumberType === "FIXED_LINE_OR_MOBILE" ){
+              isMobilePhone = true;
+            }
           }
           catch (err) {
             $log.debug(err);
           }
-          var valid = ctrl.$isEmpty(value) || isValidForRegion;
+          var valid = ctrl.$isEmpty(value) || isValidForRegion && isMobilePhone;
           ctrl.$setValidity('phoneNumber', valid);
           return value;
         }
