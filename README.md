@@ -19,6 +19,7 @@ the `country-code` descriptor. It uses
 for phone number's, which calls
 [Google's libphonenumber](https://github.com/googlei18n/libphonenumber)
 to format numbers as you type them.
+This version also validates if the phone number is Mobile.
 
 View a [demo here](https://run.plnkr.co/plunks/k32xZLSRS47w6TW3auAF/)
 

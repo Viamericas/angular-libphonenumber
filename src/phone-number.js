@@ -98,12 +98,17 @@ angular.module('cwill747.phonenumber', [])
         function validator(value) {
           var isValidForRegion = false;
           try {
-            isValidForRegion = $window.phoneUtils.isValidNumberForRegion(value, scope.countryCode);
+              isValidForRegion = $window.phoneUtils.isValidNumberForRegion(value, scope.countryCode);
+              getNumberType = $window.phoneUtils.getNumberType(value, scope.countryCode);
+
+              if (getNumberType === "MOBILE" || getNumberType === "FIXED_LINE_OR_MOBILE" ){
+                isMobilePhone = true;
+              }
           }
           catch (err) {
             $log.debug(err);
           }
-          var valid = ctrl.$isEmpty(value) || isValidForRegion;
+          var valid = ctrl.$isEmpty(value) || isValidForRegion && isMobilePhone;
           ctrl.$setValidity('phoneNumber', valid);
           return value;
         }
