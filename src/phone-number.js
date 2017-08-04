@@ -10,6 +10,7 @@
 /* global angular */
 angular.module('cwill747.phonenumber', [])
   .directive('phoneNumber', ['$log', '$window', function($log, $window) {
+
     function clearValue(value) {
       if (!value) {
         return value;
@@ -33,7 +34,8 @@ angular.module('cwill747.phonenumber', [])
       require: '?ngModel',
       scope: {
         countryCode: '=',
-        nonFormatted: '=?'
+        nonFormatted: '=?',
+        countryNumber: '='
       },
       controllerAs: '',
       controller: function() {
@@ -41,7 +43,12 @@ angular.module('cwill747.phonenumber', [])
       },
       link: function(scope, element, attrs, ctrl) {
         var el = element[0];
+
         scope.$watch('countryCode', function() {
+          ctrl.$modelValue = ctrl.$viewValue + ' ';
+        });
+
+        scope.$watch('countryNumber', function() {
           ctrl.$modelValue = ctrl.$viewValue + ' ';
         });
 
@@ -96,22 +103,28 @@ angular.module('cwill747.phonenumber', [])
         }
 
         function validator(value) {
+          console.log("number", scope.countryNumber);
           var isValidForRegion = false;
           var isMobilePhone = false;
           var getNumberType = "";
           try {
-              isValidForRegion = $window.phoneUtils.isValidNumberForRegion(value, scope.countryCode);
-              getNumberType = $window.phoneUtils.getNumberType(value, scope.countryCode);
+            var phone = scope.countryNumber+value;
 
-              if (getNumberType === "MOBILE" || getNumberType === "FIXED_LINE_OR_MOBILE" ){
-                isMobilePhone = true;
-              }
+            isValidForRegion = $window.phoneUtils.isValidNumberForRegion(phone, scope.countryCode);
+            getNumberType = $window.phoneUtils.getNumberType(phone, scope.countryCode);
+
+            if (getNumberType === "MOBILE" || getNumberType === "FIXED_LINE_OR_MOBILE" ){
+              isMobilePhone = true;
+            }
           }
           catch (err) {
             $log.debug(err);
           }
           var valid = ctrl.$isEmpty(value) || isValidForRegion && isMobilePhone;
           ctrl.$setValidity('phoneNumber', valid);
+          console.log("Number: ", value, valid);
+          console.log("number type", getNumberType);
+
           return value;
         }
 
