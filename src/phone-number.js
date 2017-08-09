@@ -103,7 +103,6 @@ angular.module('cwill747.phonenumber', [])
         }
 
         function validator(value) {
-          console.log("number", scope.countryNumber);
           var isValidForRegion = false;
           var isMobilePhone = false;
           var getNumberType = "";
@@ -122,9 +121,6 @@ angular.module('cwill747.phonenumber', [])
           }
           var valid = ctrl.$isEmpty(value) || isValidForRegion && isMobilePhone;
           ctrl.$setValidity('phoneNumber', valid);
-          console.log("Number: ", value, valid);
-          console.log("number type", getNumberType);
-
           return value;
         }
 
@@ -136,3 +132,4 @@ angular.module('cwill747.phonenumber', [])
     };
 
   }]);
+

@@ -1,7 +1,7 @@
 /**
  * angular-libphonenumber
  * Paz Muñoz libphonenumber validate mobile phone number
- * @version v1.1.4
+ * @version v1.1.5
  * @link https://github.com/mariapazz/angular-libphonenumber
  * @license Apache-2.0
  */
@@ -112,7 +112,6 @@
           }
 
           function validator(value) {
-            console.log("number", scope.countryNumber);
             var isValidForRegion = false;
             var isMobilePhone = false;
             var getNumberType = "";
@@ -131,9 +130,6 @@
             }
             var valid = ctrl.$isEmpty(value) || isValidForRegion && isMobilePhone;
             ctrl.$setValidity('phoneNumber', valid);
-            console.log("Number: ", value, valid);
-            console.log("number type", getNumberType);
-
             return value;
           }
 
