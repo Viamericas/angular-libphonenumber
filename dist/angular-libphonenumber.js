@@ -1,7 +1,7 @@
 /**
  * angular-libphonenumber
  * Nathan Hammond's libphonenumber ported to an angular filter
- * @version v1.1.6
+ * @version v1.1.7
  * @link https://github.com/cwill747/angular-libphonenumber
  * @license Apache-2.0
  */
@@ -21,7 +21,7 @@ angular.module('cwill747.phonenumber', [])
   .directive('phoneNumber', ['$log', '$window', function($log, $window) {
 
     function clearValue(value) {
-      if (!value && typeof value !== 'string') {
+      if (!value || typeof value !== 'string') {
         return value;
       }
       return value.replace(/([^0-9|+])/g, '');
