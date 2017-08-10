@@ -12,7 +12,7 @@ angular.module('cwill747.phonenumber', [])
   .directive('phoneNumber', ['$log', '$window', function($log, $window) {
 
     function clearValue(value) {
-      if (!value) {
+      if (!value && typeof value !== 'string') {
         return value;
       }
       return value.replace(/([^0-9|+])/g, '');
@@ -105,14 +105,14 @@ angular.module('cwill747.phonenumber', [])
         function validator(value) {
           var isValidForRegion = false;
           var isMobilePhone = false;
-          var getNumberType = "";
+          var getNumberType = '';
           try {
-            var phone = scope.countryNumber+value;
+            var phone = scope.countryNumber + value;
 
             isValidForRegion = $window.phoneUtils.isValidNumberForRegion(phone, scope.countryCode);
             getNumberType = $window.phoneUtils.getNumberType(phone, scope.countryCode);
 
-            if (getNumberType === "MOBILE" || getNumberType === "FIXED_LINE_OR_MOBILE" ){
+            if (getNumberType === 'MOBILE' || getNumberType === 'FIXED_LINE_OR_MOBILE') {
               isMobilePhone = true;
             }
           }

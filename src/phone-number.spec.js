@@ -49,10 +49,15 @@ describe('phonenumber', function() {
     expect(model.$valid).toBeFalsy();
   });
 
-  it('should format the number as it is typed', function() {
+  it('should format the number as it is typed', inject(function( _$window_) {
+    $window = _$window_;
+    $window.phoneUtils.getNumberType = function () {
+      return 'MOBILE';
+    };
     var input = TestUtil.compile('<input type="text" ng-model="model" phone-number ' +
       'country-code="us">');
     var model = input.controller('ngModel');
+
 
     var tests = [
       {key: '1', viewValue: '1', modelValue: '1'},
@@ -78,7 +83,7 @@ describe('phonenumber', function() {
     expect(model.$viewValue).toBe(tests[tests.length - 1].viewValue);
     expect(model.$modelValue).toBe(tests[tests.length - 1].modelValue);
     expect(model.$valid).toBeTruthy();
-  });
+  }));
   it('should ignore non digits', function() {
     var input = TestUtil.compile('<input type="text" ng-model="model" phone-number ' +
       'country-code="us">');
@@ -123,6 +128,9 @@ describe('mock libphonenumber', function() {
     $window.phoneUtils = {
       formatAsTyped: function() {
         throw 'ERROR';
+      },
+      getNumberType: function () {
+        return 'MOBILE';
       }
     };
   }));
