@@ -12,7 +12,7 @@ angular.module('cwill747.phonenumber', [])
   .directive('phoneNumber', ['$log', '$window', function($log, $window) {
 
     function clearValue(value) {
-      if (!value && typeof value !== 'string') {
+      if (!value || typeof value !== 'string') {
         return value;
       }
       return value.replace(/([^0-9|+])/g, '');
