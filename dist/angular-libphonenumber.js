@@ -1,8 +1,8 @@
 /**
  * angular-libphonenumber
  * Nathan Hammond's libphonenumber ported to an angular filter
- * @version v1.1.8
- * @link https://github.com/cwill747/angular-libphonenumber
+ * @version v1.2.0
+ * @link https://github.com/mariapazz/angular-libphonenumber
  * @license Apache-2.0
  */
 (function (angular) {
@@ -10,7 +10,7 @@
 /**
  * angular-libphonenumber
  * Nathan Hammond's libphonenumber ported to an angular filter
- * @version v1.0.0
+ * @version v1.2.0
  * @link https://github.com/cwill747/angular-libphonenumber
  * @license Apache-2.0
  * Forked by: @mariapazz
@@ -120,7 +120,6 @@
             var getNumberType = '';
             try {
               getNumberType = phoneUtils.getNumberType(value, scope.countryCode);
-              console.log('Get number type: ', getNumberType);
               if (getNumberType === 'MOBILE' || getNumberType === 'FIXED_LINE_OR_MOBILE') {
                 isMobilePhone = true;
               }
