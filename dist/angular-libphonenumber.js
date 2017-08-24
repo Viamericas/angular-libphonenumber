@@ -9,8 +9,8 @@
 
 /**
  * angular-libphonenumber
- * Nathan Hammond's libphonenumber ported to an angular filter
- * @version v1.2.0
+ * Nathan Hammond's libphonenumber ported to an angular filter.
+ * @version v1.2.1
  * @link https://github.com/cwill747/angular-libphonenumber
  * @license Apache-2.0
  * Forked by: @mariapazz
@@ -53,7 +53,8 @@
         scope: {
           countryCode: '=',
           nonFormatted: '=?',
-          phoneType: '='
+          phoneType: '=',
+          countryNumber: '='
         },
         controllerAs: '',
         controller: function() {
@@ -62,6 +63,9 @@
         link: function(scope, element, attrs, ctrl) {
           var el = element[0];
           scope.$watch('countryCode', function() {
+            ctrl.$modelValue = ctrl.$viewValue + ' ';
+          });
+          scope.$watch('countryNumber', function() {
             ctrl.$modelValue = ctrl.$viewValue + ' ';
           });
 
@@ -119,6 +123,9 @@
             var isMobilePhone = false;
             var getNumberType = '';
             try {
+              if (scope.countryCode === 'TT' || scope.countryCode === 'DO') {
+                value = scope.countryNumber + value;
+              }
               getNumberType = phoneUtils.getNumberType(value, scope.countryCode);
               if (getNumberType === 'MOBILE' || getNumberType === 'FIXED_LINE_OR_MOBILE') {
                 isMobilePhone = true;
