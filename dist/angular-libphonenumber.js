@@ -12,7 +12,7 @@
  * @ngdoc filter
  * @name phone-number
  * @kind function
- * @version v1.2.2
+ * @version v1.2.3
  * @description
  * filters a user typed phone number into a formatted number
  *
