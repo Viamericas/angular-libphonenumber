@@ -7,28 +7,20 @@
  */
 (function (angular) {
 
-/**
- * angular-libphonenumber
- * Nathan Hammond's libphonenumber ported to an angular filter.
- * @version v1.2.1
- * @link https://github.com/cwill747/angular-libphonenumber
- * @license Apache-2.0
- * Forked by: @mariapazz
- */
-(function(angular) {
 
-  /**
-   * @ngdoc filter
-   * @name phone-number
-   * @kind function
-   *
-   * @description
-   * filters a user typed phone number into a formatted number
-   *
-   */
-  /* global phoneUtils, angular */
-  angular.module('cwill747.phonenumber', [])
-    .directive('phoneNumber', ['$log', function($log) {
+/**
+ * @ngdoc filter
+ * @name phone-number
+ * @kind function
+ * @version v1.2.2
+ * @description
+ * filters a user typed phone number into a formatted number
+ *
+ */
+/* global phoneUtils, angular */
+
+angular.module('cwill747.phonenumber', [])
+  .directive('phoneNumber', ['$log', function($log) {
       function clearValue(value) {
         if (!value) {
           return value;
@@ -123,7 +115,7 @@
             var isMobilePhone = false;
             var getNumberType = '';
             try {
-              if (scope.countryCode === 'TT' || scope.countryCode === 'DO') {
+              if (value && (scope.countryCode === 'TT' || scope.countryCode === 'DO')) {
                 value = scope.countryNumber + value;
               }
               getNumberType = phoneUtils.getNumberType(value, scope.countryCode);
@@ -170,7 +162,5 @@
       };
 
     }]);
-
-})(angular);
 
 })(angular);
